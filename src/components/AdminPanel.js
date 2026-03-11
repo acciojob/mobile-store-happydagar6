@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function AdminPanel({ products, addProduct, deleteProduct, editProduct }) {
+function AdminPanel({ products, addProduct, deleteProduct }) {
   const [formData, setFormData] = useState({ name: '', price: '', description: '', image: '' });
 
   const handleAdd = (e) => {
     e.preventDefault();
     addProduct(formData);
-    setFormData({ name: '', price: '', description: '', image: '' }); // Clear form
+    setFormData({ name: '', price: '', description: '', image: '' });
   };
 
   return (
@@ -15,7 +15,6 @@ function AdminPanel({ products, addProduct, deleteProduct, editProduct }) {
       <h2>Admin Panel</h2>
       
       <form onSubmit={handleAdd}>
-        {/* Cypress needs .form-control class on inputs */}
         <input className="form-control" type="text" placeholder="Name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} required />
         <input className="form-control" type="number" placeholder="Price" value={formData.price} onChange={(e) => setFormData({...formData, price: e.target.value})} required />
         <input className="form-control" type="text" placeholder="Description" value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} required />
@@ -28,17 +27,9 @@ function AdminPanel({ products, addProduct, deleteProduct, editProduct }) {
           <li key={product.id}>
             {product.name} - ${product.price}
             
-            {/* Cypress checks for .float-right for Delete and Edit actions */}
+            {/* ✅ FIX: Yahan ab sirf Delete button hai .float-right ke sath */}
             <button className="float-right" onClick={() => deleteProduct(product.id)}>Delete</button>
-            
-            {/* Basic implementation for editing price directly */}
-            <button className="float-right" onClick={() => {
-                const newPrice = prompt("Enter new price:", product.price);
-                if(newPrice) editProduct(product.id, parseInt(newPrice));
-            }}>Edit Price</button>
-            
-            {/* Link to view product details from admin panel */}
-             <Link to={`/products/${product.id}`}>View</Link>
+            <Link to={`/products/${product.id}`}>View</Link>
           </li>
         ))}
       </ul>

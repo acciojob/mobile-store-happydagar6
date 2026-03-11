@@ -5,7 +5,6 @@ import ProductDetails from './ProductDetails';
 import AdminPanel from './AdminPanel';
 
 function App() {
-  // Initial 8 products (Cypress test pass karne ke liye)
   const [products, setProducts] = useState([
     { id: 1, name: "Phone 1", price: 100, description: "Desc 1", image: "img1.png" },
     { id: 2, name: "Phone 2", price: 200, description: "Desc 2", image: "img2.png" },
@@ -17,7 +16,6 @@ function App() {
     { id: 8, name: "Phone 8", price: 800, description: "Desc 8", image: "img8.png" }
   ]);
 
-  // CRUD Functions jo Admin Panel use karega
   const addProduct = (newProduct) => {
     setProducts([...products, { ...newProduct, id: Date.now() }]);
   };
@@ -37,16 +35,15 @@ function App() {
       <nav>
         <ul>
           <li><Link to="/">Home</Link></li>
-          {/* Test requires nth-child(2) > a to be Admin Panel */}
           <li><Link to="/admin">Admin Panel</Link></li>
         </ul>
       </nav>
 
       <Routes>
         <Route path="/" element={<ProductList products={products} />} />
-        {/* Dynamic Route setup */}
-        <Route path="/products/:id" element={<ProductDetails products={products} />} />
-        <Route path="/admin" element={<AdminPanel products={products} addProduct={addProduct} deleteProduct={deleteProduct} editProduct={editProduct} />} />
+        {/* ✅ FIX: editProduct function ko details page par bhej diya */}
+        <Route path="/products/:id" element={<ProductDetails products={products} editProduct={editProduct} />} />
+        <Route path="/admin" element={<AdminPanel products={products} addProduct={addProduct} deleteProduct={deleteProduct} />} />
       </Routes>
     </Router>
   );
