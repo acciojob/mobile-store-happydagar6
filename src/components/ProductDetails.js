@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 function ProductDetails({ products, editProduct }) {
   const { id } = useParams();
@@ -18,7 +18,7 @@ function ProductDetails({ products, editProduct }) {
 
   return (
     <div>
-      <button className="btn" onClick={() => navigate('/')}>Back</button>
+      <Link className="btn" to="/">Back</Link>
       
       <div>
         <h2>{product.name}</h2>
