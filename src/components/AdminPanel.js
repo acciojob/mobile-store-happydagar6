@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function AdminPanel({ products, addProduct, deleteProduct }) {
+function AdminPanel({ products, addProduct, deleteProduct, editProduct }) {
   const [formData, setFormData] = useState({ name: '', price: '', description: '', image: '' });
 
   const handleAdd = (e) => {
@@ -27,8 +27,11 @@ function AdminPanel({ products, addProduct, deleteProduct }) {
           <li key={product.id}>
             {product.name} - ${product.price}
             
-            {/* ✅ FIX: Yahan ab sirf Delete button hai .float-right ke sath */}
-            <button className="float-right" onClick={() => deleteProduct(product.id)}>Delete</button>
+            <button className="delete-btn float-right" onClick={() => deleteProduct(product.id)}>Delete</button>
+            <button className="edit-btn float-right" onClick={() => {
+              const newPrice = prompt("Enter new price:", product.price);
+              if (newPrice) editProduct(product.id, parseInt(newPrice));
+            }}>Edit Price</button>
             <Link to={`/products/${product.id}`}>View</Link>
           </li>
         ))}

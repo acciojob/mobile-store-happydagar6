@@ -43,7 +43,7 @@ function App() {
         <Route path="/" element={<ProductList products={products} />} />
         {/* ✅ FIX: editProduct function ko details page par bhej diya */}
         <Route path="/products/:id" element={<ProductDetails products={products} editProduct={editProduct} />} />
-        <Route path="/admin" element={<AdminPanel products={products} addProduct={addProduct} deleteProduct={deleteProduct} />} />
+        <Route path="/admin" element={<AdminPanel products={products} addProduct={addProduct} deleteProduct={deleteProduct} editProduct={editProduct} />} />
       </Routes>
     </Router>
   );
