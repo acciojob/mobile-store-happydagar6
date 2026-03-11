@@ -27,8 +27,8 @@ function AdminPanel({ products, addProduct, deleteProduct, editProduct }) {
           <li key={product.id}>
             {product.name} - ${product.price}
             
-            <button className="delete-btn float-right" onClick={() => deleteProduct(product.id)}>Delete</button>
-            <button className="edit-btn float-right" onClick={() => {
+            <button className="float-right" onClick={() => deleteProduct(product.id)}>Delete</button>
+            <button className="edit-btn" onClick={() => {
               const newPrice = prompt("Enter new price:", product.price);
               if (newPrice) editProduct(product.id, parseInt(newPrice));
             }}>Edit Price</button>
