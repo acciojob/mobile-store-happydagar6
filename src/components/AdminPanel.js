@@ -28,10 +28,6 @@ function AdminPanel({ products, addProduct, deleteProduct, editProduct }) {
             {product.name} - ${product.price}
             
             <button className="float-right" onClick={() => deleteProduct(product.id)}>Delete</button>
-            <button className="edit-btn" onClick={() => {
-              const newPrice = prompt("Enter new price:", product.price);
-              if (newPrice) editProduct(product.id, parseInt(newPrice));
-            }}>Edit Price</button>
             <Link to={`/products/${product.id}`}>View</Link>
           </li>
         ))}
